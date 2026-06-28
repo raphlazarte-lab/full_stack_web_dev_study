@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>function</title>
+</head>
+
+<body>
+  <button onclick="gameResult('rock');">rock</button>
+  <button onclick="gameResult('paper');">paper</button>
+  <button onclick="gameResult('scissor');">scissor</button>
+</body>
+<script>
+  function computerRandomMove() {
+    let randomMove = Math.floor(Math.random() * 3) + 1;
+    
+    if (randomMove === 1) {
+      randomMove = "rock";
+    } else if (randomMove === 2) {
+      randomMove = "paper";
+    } else if (randomMove === 3) {
+      randomMove = "scissor";
+    }
+    return randomMove;
+  }
+  
+  function gameResult(userMove) {
+    let randomMove = computerRandomMove();
+    let result;
+    if (userMove === 'rock') {
+      if (randomMove === 'rock') {
+        result = "tie";
+      } else if (randomMove === 'paper') {
+        result = "you lose";
+      } else if (randomMove === 'scissor') {
+        result = "you win";
+      }
+    }
+    
+    
+    if (userMove === 'paper') {
+      if (randomMove === 'rock') {
+        result = "you win";
+      } else if (randomMove === 'paper') {
+        result = "tie";
+      } else if (randomMove === 'scissor') {
+        result = "you lose";
+      }
+    }
+    if (userMove === 'scissor') {
+      if (randomMove === 'rock') {
+        result = "you lose";
+      } else if (randomMove === 'paper') {
+        result = "you win";
+      } else if (randomMove === 'scissor') {
+        result = "tie";
+      }
+    }
+    console.log(`computer move ${randomMove} ${result}`);
+  }
+</script>
+
+</html>

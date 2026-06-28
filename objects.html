@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>function</title>
+</head>
+
+<body>
+  <button onclick="gameResult('rock');">rock</button>
+  <button onclick="gameResult('paper');">paper</button>
+  <button onclick="gameResult('scissor');">scissor</button>
+  <button onclick="
+  gameScore.win=0;
+  gameScore.lose=0;
+  gameScore.tie=0;
+  localStorage.removeItem('gameScore');
+  ">reset</button>
+</body>
+<script>
+
+  //random computer move
+  function computerRandomMove() {
+    let randomMove = Math.floor(Math.random() * 3) + 1;
+    
+    if (randomMove === 1) {
+      randomMove = "rock";
+    } else if (randomMove === 2) {
+      randomMove = "paper";
+    } else if (randomMove === 3) {
+      randomMove = "scissor";
+    }
+    return randomMove;
+  }
+  //score
+  let gameScore = JSON.parse(localStorage.getItem('gameScore')) || {
+    win: 0,
+    lose: 0,
+    tie: 0
+  };
+
+
+  //game results 
+  function gameResult(userMove) {
+    const randomMove = computerRandomMove();
+    let result;
+    
+    if (userMove === 'rock') {
+      if (randomMove === 'rock') {
+        result = "tie";
+      } else if (randomMove === 'paper') {
+        result = "you lose";
+      } else if (randomMove === 'scissor') {
+        result = "you win";
+      }
+    }
+    
+    
+    if (userMove === 'paper') {
+      if (randomMove === 'rock') {
+        result = "you win";
+      } else if (randomMove === 'paper') {
+        result = "tie";
+      } else if (randomMove === 'scissor') {
+        result = "you lose";
+      }
+    }
+    if (userMove === 'scissor') {
+      if (randomMove === 'rock') {
+        result = "you lose";
+      } else if (randomMove === 'paper') {
+        result = "you win";
+      } else if (randomMove === 'scissor') {
+        result = "tie";
+      }
+    }
+    
+    if (result === 'you win') {
+      gameScore.win += 1;
+    } else if (result === 'you lose') {
+      gameScore.lose += 1;
+    } else if (result === 'tie') {
+      gameScore.tie += 1;
+    }
+    console.log(`computer move ${randomMove} ${result}
+    win: ${gameScore.win} 
+    lose: ${gameScore.lose} 
+    tie: ${gameScore.tie}`);
+    
+    localStorage.setItem("gameScore",JSON.stringify(gameScore));
+  }
+</script>
+
+</html> 
